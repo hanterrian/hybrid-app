@@ -7,7 +7,6 @@ GATEWAY_NETWORK=gateway
 COMPOSE_FILE=docker-compose.dev.yml
 APP_CONTAINER=app
 TEMP_INSTALL_DIRECTORY=src
-SELF_DESTRUCTION=true
 
 install_laravel() {
   # Init a new Laravel app into a temporary directory
@@ -59,12 +58,6 @@ if [ "$1" == "--breeze" ]; then
     INSTALL_BREEZE=true
 fi
 
-# Configure self destruction
-if [ "$1" == "--destruct" ]; then
-    shift 1
-    SELF_DESTRUCTION=true
-fi
-
 # Copy the .env file from the dist
 if [ ! -f "$ENV_FILE" ]; then
     cp "$ENV_DIST_FILE" "$ENV_FILE"
@@ -89,12 +82,6 @@ fi
 
 # Start containers
 docker compose -f "$COMPOSE_FILE" up -d
-
-# Delete installation files
-if [ "$SELF_DESTRUCTION" == true ]; then
-    echo "Removing installation script"
-    rm ./install.sh
-fi
 
 # Print the final message
 echo "The API app has been installed and run on http://localhost:8000."
