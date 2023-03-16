@@ -1,9 +1,22 @@
 version: '3.8'
 
 services:
-    app:
+    app_client:
         build:
-            dockerfile: .docker/dev/app/Dockerfile
+            dockerfile: .docker/dev/app_client/Dockerfile
+        volumes:
+            - ./:/var/www/html
+        hostname: client
+        ports:
+            - "3000:3000" # The Nuxt app port
+            - "24678:24678" # The Vite port for WebSocket
+        networks:
+            - client
+            - gateway
+
+    app_api:
+        build:
+            dockerfile: .docker/dev/app_api/Dockerfile
             args:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
@@ -105,6 +118,9 @@ volumes:
 networks:
     api:
         name: api
+
+    client:
+        name: client
 
     gateway:
         name: gateway

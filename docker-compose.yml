@@ -1,9 +1,18 @@
 version: '3.8'
 
 services:
-    app:
+    app_client:
         build:
-            dockerfile: .docker/prod/app/Dockerfile
+            dockerfile: .docker/prod/app_client/Dockerfile
+        hostname: client
+        networks:
+            - client
+            - gateway
+        restart: unless-stopped
+
+    app_api:
+        build:
+            dockerfile: .docker/prod/app_api/Dockerfile
             args:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
@@ -80,6 +89,9 @@ volumes:
 networks:
     api:
         name: api
+
+    client:
+        name: client
 
     gateway:
         name: gateway
