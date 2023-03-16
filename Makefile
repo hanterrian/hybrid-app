@@ -171,6 +171,24 @@ own.me:
 octane.reload:
 	docker compose -f ${COMPOSE_FILE} exec app php artisan octane:reload
 
+# Install yarn dependencies
+yarn.install:
+	docker compose -f ${COMPOSE_FILE} exec app yarn install
+
+# Alias to install yarn dependencies
+yi: yarn.install
+
+# Upgrade yarn dependencies
+yarn.upgrade:
+	docker compose -f ${COMPOSE_FILE} exec app yarn upgrade
+
+# Alias to upgrade yarn dependencies
+yu: yarn.upgrade
+
+# Show outdated yarn dependencies
+yarn.outdated:
+	docker compose exec -f ${COMPOSE_FILE} app yarn outdated
+
 # Alias to reload the Octane workers
 or: octane.reload
 
