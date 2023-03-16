@@ -2,10 +2,10 @@
 FROM node:16-alpine as builder
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/client
 
 # Copy all files into the container
-COPY ./ ./
+COPY ./client ./
 
 # Install build dependencies
 RUN yarn install \
@@ -29,10 +29,10 @@ RUN rm -rf node_modules && \
 FROM node:16-alpine
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/client
 
 # Copy the built app
-COPY --from=builder /var/www/html ./
+COPY --from=builder /var/www/html/client ./
 
 # Specify the host variable
 ENV HOST 0.0.0.0

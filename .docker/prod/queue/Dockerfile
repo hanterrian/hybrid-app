@@ -6,7 +6,7 @@ ARG IMAGE_TAG=latest
 FROM ${IMAGE_REGISTRY}/api-base:${IMAGE_TAG}
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Run the queue service
 CMD ["php", "artisan", "queue:work", "--tries=3", "--sleep=3"]

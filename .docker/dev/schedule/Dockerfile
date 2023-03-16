@@ -17,7 +17,7 @@ COPY ./.docker/dev/schedule/cron.d/crontab /etc/cron.d/crontab
 RUN crontab /etc/cron.d/crontab
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Run the cron service
 CMD ["cron", "-f"]

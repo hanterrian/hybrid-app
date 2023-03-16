@@ -9,7 +9,7 @@ RUN apk update \
     && npm install -g nuxi
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/client
 
 # Specify the host variable
 ENV HOST 0.0.0.0

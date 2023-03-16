@@ -17,7 +17,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./storage:/var/www/html/storage
+            - ./api/storage:/var/www/html/api/storage
         links:
             - postgres
             - redis
@@ -34,7 +34,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./storage:/var/www/html/storage
+            - ./api/storage:/var/www/html/api/storage
         links:
             - postgres
             - redis
@@ -49,7 +49,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./storage:/var/www/html/storage
+            - ./api/storage:/var/www/html/api/storage
         links:
             - postgres
             - redis

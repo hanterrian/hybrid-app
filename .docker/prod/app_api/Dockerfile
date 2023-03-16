@@ -14,7 +14,7 @@ RUN && apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Export Octane port
 EXPOSE 8000

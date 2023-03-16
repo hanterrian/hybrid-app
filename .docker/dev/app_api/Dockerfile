@@ -27,7 +27,7 @@ ENV NODE_PATH /usr/lib/node_modules
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Export Octane port
 EXPOSE 8000

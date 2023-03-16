@@ -2,7 +2,7 @@
 FROM composer:latest as builder
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Copy composer files
 COPY ./composer.json ./composer.json
@@ -17,7 +17,7 @@ RUN composer install \
     --no-plugins
 
 # Copy all files into the container
-COPY ./ ./
+COPY ./api ./
 
 # Dump composer autoload
 RUN composer dump-autoload --optimize
@@ -68,10 +68,10 @@ COPY ./.docker/prod/base/php.ini "/${PHP_INI_DIR}/php.ini"
 COPY ./.docker/prod/base/conf.d "/${PHP_INI_DIR}/conf.d"
 
 # Set up the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/html/api
 
 # Copy files from builder image
-COPY --from=builder /var/www/html ./
+COPY --from=builder /var/www/html/api ./
 
 # Optimizing configuration loading
 RUN php artisan config:cache \

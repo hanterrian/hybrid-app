@@ -5,7 +5,7 @@ services:
         build:
             dockerfile: .docker/dev/app_client/Dockerfile
         volumes:
-            - ./:/var/www/html
+            - ./client:/var/www/html/client
         hostname: client
         ports:
             - "3000:3000" # The Nuxt app port
@@ -21,7 +21,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./:/var/www/html
+            - ./api:/var/www/html/api
         links:
             - postgres
             - postgres-testing
@@ -42,7 +42,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./:/var/www/html
+            - ./api:/var/www/html/api
         links:
             - postgres
             - redis
@@ -57,7 +57,7 @@ services:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
-            - ./:/var/www/html
+            - ./api:/var/www/html/api
         links:
             - postgres
             - redis
