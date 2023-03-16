@@ -7,6 +7,8 @@ BASE_IMAGE_DOCKERFILE ?= .docker/prod/base/Dockerfile
 IMAGE_REGISTRY ?= prod
 IMAGE_TAG ?= latest
 
+ARGUMENTS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+
 #-----------------------------------------------------------
 # Docker
 #-----------------------------------------------------------
@@ -90,6 +92,10 @@ restart.app_client:
 # Alias to restart the app_client container
 ra_client: restart.app_client
 
+# Run artisan
+artisan:
+	docker compose -f ${COMPOSE_FILE} exec app_api php artisan $(ARGUMENTS)
+
 # Run the tinker service
 tinker:
 	docker compose -f ${COMPOSE_FILE} exec app_api php artisan tinker
@@ -151,6 +157,13 @@ r.composer.update:
 
 # Alias to update composer dependencies
 cu: composer.update
+
+# Require composer
+composer.require:
+	docker compose -f ${COMPOSE_FILE} exec app_api composer require $(ARGUMENTS)
+
+# Alias to require composer
+cr: composer.require
 
 # Show outdated composer dependencies
 composer.outdated:
