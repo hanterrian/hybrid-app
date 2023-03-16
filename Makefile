@@ -195,6 +195,10 @@ own.me:
 octane.reload:
 	docker compose -f ${COMPOSE_FILE} exec app_api php artisan octane:reload
 
+# Yarn
+yarn:
+	docker compose -f ${COMPOSE_FILE} exec app_client yarn $(ARGUMENTS)
+
 # Install yarn dependencies
 yarn.install:
 	docker compose -f ${COMPOSE_FILE} exec app_client yarn install
