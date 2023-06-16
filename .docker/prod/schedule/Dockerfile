@@ -3,7 +3,7 @@ ARG IMAGE_REGISTRY=prod
 ARG IMAGE_TAG=latest
 
 # Image
-FROM ${IMAGE_REGISTRY}/api-base:${IMAGE_TAG}
+FROM ${IMAGE_REGISTRY}/app-base:${IMAGE_TAG}
 
 # Update dependencies
 RUN apt-get update \

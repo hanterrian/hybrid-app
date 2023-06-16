@@ -31,6 +31,17 @@ FROM node:16-alpine
 # Set up the working directory
 WORKDIR /var/www/html/client
 
+# Configure non-root user.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
+RUN groupmod -o -g ${PGID} www-data && \
+    usermod -o -u ${PUID} -g www-data www-data
+
+RUN chown -R www-data:www-data /var/www/html/client
+
 # Copy the built app
 COPY --from=builder /var/www/html/client ./
 

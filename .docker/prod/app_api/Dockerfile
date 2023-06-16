@@ -3,7 +3,7 @@ ARG IMAGE_REGISTRY=prod
 ARG IMAGE_TAG=latest
 
 # Image
-FROM ${IMAGE_REGISTRY}/api-base:${IMAGE_TAG}
+FROM ${IMAGE_REGISTRY}/app-base:${IMAGE_TAG}
 
 # Update dependencies
 RUN && apt-get update \
@@ -15,6 +15,17 @@ RUN && apt-get update \
 
 # Set up the working directory
 WORKDIR /var/www/html/api
+
+# Configure non-root user.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
+RUN groupmod -o -g ${PGID} www-data && \
+    usermod -o -u ${PUID} -g www-data www-data
+
+RUN chown -R www-data:www-data /var/www/html/api
 
 # Export Octane port
 EXPOSE 8000
