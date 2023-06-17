@@ -7,9 +7,12 @@ FROM ${IMAGE_REGISTRY}/api-base:${IMAGE_TAG}
 
 # Update dependencies
 RUN apt-get update \
+    && apt-get install -y libwebp-dev libpng-dev \
 # Install Swoole (required by Octane)
     && pecl install swoole \
     && docker-php-ext-enable swoole \
+    && docker-php-ext-configure gd --with-freetype --with-webp --with-jpeg \
+    && docker-php-ext-install gd \
 # Install Node (v16 LTS) (required by Octane)
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs supervisor \

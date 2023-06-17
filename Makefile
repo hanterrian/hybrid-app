@@ -40,6 +40,9 @@ down:
 build:
 	docker compose -f ${COMPOSE_FILE} build
 
+build-no-cache:
+	docker compose -f ${COMPOSE_FILE} build --no-cache
+
 # Build all containers
 build.all: build.base build.cbase build
 
