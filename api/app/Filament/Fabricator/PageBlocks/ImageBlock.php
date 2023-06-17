@@ -3,17 +3,15 @@
 namespace App\Filament\Fabricator\PageBlocks;
 
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\RichEditor;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
-class TextBlock extends PageBlock
+class ImageBlock extends PageBlock
 {
     public static function getBlockSchema(): Block
     {
-        return Block::make('text')
+        return Block::make('image')
             ->schema([
-                RichEditor::make('text')
-                    ->required(),
+                //
             ]);
     }
 
