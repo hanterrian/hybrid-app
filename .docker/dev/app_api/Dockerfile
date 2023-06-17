@@ -43,9 +43,11 @@ RUN chown -R www-data:www-data /var/www/html/api
 # Export Octane port
 EXPOSE 8000
 
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
 # Run the Octane service
-CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=8000", "--max-requests=1000", "--watch"]
+#CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=8000", "--max-requests=1000", "--watch"]
 
 # The health check configuration
-HEALTHCHECK --start-period=5s --interval=5s --timeout=5s --retries=3 \
-    CMD php artisan octane:status || exit 1
+#HEALTHCHECK --start-period=5s --interval=5s --timeout=5s --retries=3 \
+#    CMD php artisan octane:status || exit 1

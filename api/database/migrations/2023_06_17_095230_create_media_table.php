@@ -5,12 +5,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create(app(Curator::getMediaModel())->getTable(), function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('disk')->default('public');
             $table->string('directory')->default('media');
             $table->string('name');
