@@ -12,7 +12,7 @@ RUN apt-get update \
     && docker-php-ext-enable swoole \
 # Install Node (v16 LTS) (required by Octane)
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y nodejs supervisor \
 # Install NPM (required by Octane)
     && npm install -g npm \
 # Install Chokidar (required by Octane)

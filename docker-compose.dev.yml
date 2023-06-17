@@ -22,6 +22,7 @@ services:
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
             - ./api:/var/www/html/api
+            - ./.docker/dev/app_api/supervisor/horizon.conf:/etc/supervisor/conf.d/horizon.conf
         links:
             - postgres
             - postgres-testing
@@ -38,6 +39,21 @@ services:
     queue:
         build:
             dockerfile: .docker/dev/queue/Dockerfile
+            args:
+                IMAGE_REGISTRY: ${IMAGE_REGISTRY}
+                IMAGE_TAG: ${IMAGE_TAG}
+        volumes:
+            - ./api:/var/www/html/api
+        links:
+            - postgres
+            - redis
+            - mailhog
+        networks:
+            - api
+
+    horizon:
+        build:
+            dockerfile: .docker/dev/horizon/Dockerfile
             args:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}

@@ -38,7 +38,7 @@ down:
 
 # Build containers
 build:
-	docker compose -f ${COMPOSE_FILE} build --no-cache
+	docker compose -f ${COMPOSE_FILE} build
 
 # Build all containers
 build.all: build.base build.cbase build
