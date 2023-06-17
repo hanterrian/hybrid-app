@@ -1,27 +1,36 @@
 version: '3.8'
 
 services:
-    app:
+    app_client:
         build:
-            dockerfile: .docker/dev/app/Dockerfile
+            dockerfile: .docker/dev/app_client/Dockerfile
+        volumes:
+            - ./client:/var/www/html/client
+        hostname: client
+        ports:
+            - "3000:3000" # The Nuxt app port
+            - "24678:24678" # The Vite port for WebSocket
+        networks:
+            - client
+            - gateway
+
+    app_api:
+        build:
+            dockerfile: .docker/dev/app_api/Dockerfile
             args:
                 IMAGE_REGISTRY: ${IMAGE_REGISTRY}
                 IMAGE_TAG: ${IMAGE_TAG}
         volumes:
             - ./api:/var/www/html/api
-            - ./client:/var/www/html/client
         links:
             - postgres
             - postgres-testing
             - redis
             - mailhog
-        hostname: app
+        hostname: api
         ports:
-            - "3000:3000" # The Nuxt app port
-            - "24678:24678" # The Vite port for WebSocket
             - "8000:8000"
         networks:
-            - client
             - api
             - gateway
         restart: unless-stopped
