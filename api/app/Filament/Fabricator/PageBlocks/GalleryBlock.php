@@ -3,6 +3,7 @@
 namespace App\Filament\Fabricator\PageBlocks;
 
 use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
 class GalleryBlock extends PageBlock
@@ -11,7 +12,11 @@ class GalleryBlock extends PageBlock
     {
         return Block::make('gallery')
             ->schema([
-                //
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->collection('gallery')
+                    ->multiple()
+                    ->image()
+                    ->required(),
             ]);
     }
 

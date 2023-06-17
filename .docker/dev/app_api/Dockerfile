@@ -8,6 +8,7 @@ FROM ${IMAGE_REGISTRY}/api-base:${IMAGE_TAG}
 # Update dependencies
 RUN apt-get update \
     && apt-get install -y libwebp-dev libpng-dev \
+    && apt-get install -y jpegoptim optipng pngquant gifsicle \
 # Install Swoole (required by Octane)
     && pecl install swoole \
     && docker-php-ext-enable swoole \
@@ -20,6 +21,7 @@ RUN apt-get update \
     && npm install -g npm \
 # Install Chokidar (required by Octane)
     && npm install --g chokidar \
+    && npm install -g svgo \
 # Clean up the apt cache
     && rm -rf /var/lib/apt/lists/*
 
