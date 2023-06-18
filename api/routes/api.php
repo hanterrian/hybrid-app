@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('page/{slug}', [\App\Http\Controllers\PageController::class, 'view'])->name('page.view');
