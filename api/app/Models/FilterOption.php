@@ -12,6 +12,7 @@ class FilterOption extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'enable',
     ];
 }
