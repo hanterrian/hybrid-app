@@ -6,10 +6,12 @@ use App\Filament\Resources\FilterOptionResource\Pages;
 use App\Models\FilterOption;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class FilterOptionResource extends Resource
@@ -25,6 +27,10 @@ class FilterOptionResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->required(),
+
+                Select::make('type')
+                    ->options(FilterOption::TYPES)
                     ->required(),
 
                 Checkbox::make('enable'),
@@ -46,6 +52,8 @@ class FilterOptionResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('type'),
 
                 TextColumn::make('enable'),
             ]);
