@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
+use App\Filament\Resources\CategoryResource\RelationManagers\CategoryFilterItemsRelationManager;
 use App\Models\Category;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Placeholder;
@@ -81,5 +82,12 @@ class CategoryResource extends Resource
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'slug'];
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            CategoryFilterItemsRelationManager::class,
+        ];
     }
 }

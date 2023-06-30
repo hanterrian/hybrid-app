@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 
 class FilterOptionResource extends Resource
 {
@@ -53,9 +54,14 @@ class FilterOptionResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('type'),
+                TextColumn::make('type')
+                    ->enum(FilterOption::TYPES),
 
-                TextColumn::make('enable'),
+                TextColumn::make('category_filter_items_count')
+                    ->label('Attached items')
+                    ->counts('categoryFilterItems'),
+
+                ToggleColumn::make('enable'),
             ]);
     }
 

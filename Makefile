@@ -189,6 +189,9 @@ composer.outdated:
 composer.autoload:
 	docker compose -f ${COMPOSE_FILE} exec -u 1000 app_api composer dump-autoload
 
+ide:
+	docker compose -f ${COMPOSE_FILE} exec -u 1000 app_api composer ide
+
 # Generate a symlink to the storage directory
 storage.link:
 	docker compose -f ${COMPOSE_FILE} exec -u 1000 app_api php artisan storage:link --relative
