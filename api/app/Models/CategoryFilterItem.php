@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $max_value
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property array|null $value_list
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Category> $category
  * @property-read int|null $category_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FilterOption> $filterOption
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CategoryFilterItem whereMinValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CategoryFilterItem whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CategoryFilterItem whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CategoryFilterItem whereValueList($value)
  * @mixin \Eloquent
  */
 class CategoryFilterItem extends Model
@@ -38,8 +40,13 @@ class CategoryFilterItem extends Model
         'category_id',
         'filter_option_id',
         'value',
+        'value_list',
         'min_value',
         'max_value',
+    ];
+
+    protected $casts = [
+        'value_list' => 'array',
     ];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\HasMany

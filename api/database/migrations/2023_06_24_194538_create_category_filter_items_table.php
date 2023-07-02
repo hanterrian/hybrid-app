@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->foreignIdFor(\App\Models\FilterOption::class)->constrained()->cascadeOnDelete();
 
             $table->string('value')->nullable();
+            $table->json('value_list')->nullable();
             $table->string('min_value')->nullable();
             $table->string('max_value')->nullable();
 

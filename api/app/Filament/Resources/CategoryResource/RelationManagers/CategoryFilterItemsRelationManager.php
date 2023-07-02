@@ -30,7 +30,7 @@ class CategoryFilterItemsRelationManager extends RelationManager
                     ->required(),
 
                 Forms\Components\TextInput::make('value')
-                    ->hidden(function (\Closure $get) {
+                    ->visible(function (\Closure $get) {
                         $option = $get('filter_option_id');
 
                         $type = FilterOption::where('id', $option)->first();
@@ -39,10 +39,22 @@ class CategoryFilterItemsRelationManager extends RelationManager
                             return true;
                         }
 
-                        return $type->type != FilterOption::TYPE_TEXT;
+                        return $type->type == FilterOption::TYPE_TEXT;
+                    }),
+                Forms\Components\TagsInput::make('value_list')
+                    ->visible(function (\Closure $get) {
+                        $option = $get('filter_option_id');
+
+                        $type = FilterOption::where('id', $option)->first();
+
+                        if (!$type) {
+                            return true;
+                        }
+
+                        return $type->type == FilterOption::TYPE_SELECT;
                     }),
                 Forms\Components\TextInput::make('min_value')
-                    ->hidden(function (\Closure $get) {
+                    ->visible(function (\Closure $get) {
                         $option = $get('filter_option_id');
 
                         $type = FilterOption::where('id', $option)->first();
@@ -51,10 +63,10 @@ class CategoryFilterItemsRelationManager extends RelationManager
                             return true;
                         }
 
-                        return $type->type == FilterOption::TYPE_TEXT;
+                        return $type->type == FilterOption::TYPE_RANGE;
                     }),
                 Forms\Components\TextInput::make('max_value')
-                    ->hidden(function (\Closure $get) {
+                    ->visible(function (\Closure $get) {
                         $option = $get('filter_option_id');
 
                         $type = FilterOption::where('id', $option)->first();
@@ -63,7 +75,7 @@ class CategoryFilterItemsRelationManager extends RelationManager
                             return true;
                         }
 
-                        return $type->type == FilterOption::TYPE_TEXT;
+                        return $type->type == FilterOption::TYPE_RANGE;
                     }),
             ]);
     }
